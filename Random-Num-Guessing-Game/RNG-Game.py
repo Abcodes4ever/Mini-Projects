@@ -2,10 +2,11 @@ import time
 import sys
 import random
 
-def intro(firsttime):
-    if firsttime:
+def intro(first_time: bool):
+    if first_time == True:
         print("\nWelcome to the Random No. Guessing Game!")
-        print("I will choose a number from 1 to 100. \nYou will have 5 chances to correctly guess the no. .\nIf you guess the number correctly within the given chances, you win.\nOtherwise, I win and you lose.")
+        print("I will choose a number from 1 to 100. \nYou will have 5 chances to correctly guess the no. ." \
+        "\nIf you guess the number correctly within the given chances, you win.\nOtherwise, I win and you lose.")
         time.sleep(5)
         ans = input("Are you ready to play?(y/n) ")
     else:
@@ -36,14 +37,10 @@ def exit_game():
 
 # Application
 def app():
-    # This ain't working, the value of "first" changed inside if ain't reflecting outside
-    first = True
-    if first:
+    if iteration_count == 0:
         user_ans = intro(True)
-        global first
-        first = False
     else:
-        intro(False)
+        user_ans = intro(False)
     if user_ans.lower() == 'y':
         win, target = game()
     else:
@@ -54,7 +51,10 @@ def app():
         print("Better luck next time!")
         print(f"The no. was: {target}")
 
+# Tracks number of times the game has been played. Used to determine whether to show the intro or not.
+iteration_count = 0
 while True:
     app()
+    iteration_count += 1
     
         
